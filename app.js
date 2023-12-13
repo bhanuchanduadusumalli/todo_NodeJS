@@ -85,3 +85,22 @@ app.post("/todos/", async (request, response) => {
   await db.run(insertTodo);
   response.send("Todo Successfully Added");
 });
+
+//put request
+app.put("/todos/:todoId/", async (request, response) => {
+  const { todoId } = request.params;
+  const preTodoQuery = `select * from todo where id=${todoId}`;
+  const preTodo = await db.get(preTodoQuery);
+  //const { todo, priority, status } = preTodo;
+  //console.log(todo, priority, status);
+  const { status } = request.body;
+  console.log(status);
+});
+
+//delete request
+app.delete("/todos/:todoId/", async (request, response) => {
+  const { todoId } = request.params;
+  const deleteTodo = `delete from todo where id=${todoId}`;
+  await db.run(deleteTodo);
+  response.send("Todo Deleted");
+});

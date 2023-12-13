@@ -67,3 +67,21 @@ app.get("/todos/", async (request, response) => {
   const data = await db.all(getTodosQuery);
   response.send(data);
 });
+
+//Get request
+app.get("/todos/:todoId/", async (request, response) => {
+  const { todoId } = request.params;
+  const getTodo = `select * from todo where id=${todoId}`;
+  const todo = await db.get(getTodo);
+  response.send(todo);
+});
+
+//Post request
+app.post("/todos/", async (request, response) => {
+  const todoItem = request.body;
+  const { id, todo, priority, status } = todoItem;
+  const insertTodo = `insert into todo 
+    values(${id},'${todo}','${priority}','${status}')`;
+  await db.run(insertTodo);
+  response.send("Todo Successfully Added");
+});

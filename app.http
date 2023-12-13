@@ -11,3 +11,19 @@ GET http://localhost:3001/todos/?priority=HIGH&status=IN%20PROGRESS
 
 ###
 GET http://localhost:3001/todos/?search_q=Play
+
+
+###
+Get http://localhost:3001/todos/2/ 
+
+
+###
+POST http://localhost:3001/todos/
+
+{
+  "id": 10,
+  "todo": "Finalize event theme",
+  "priority": "LOW",
+  "status": "TO DO"
+}
+
